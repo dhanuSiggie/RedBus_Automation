@@ -34,6 +34,14 @@ public class CommonUtil {
 			logger.info(addClassNameAndMNameInLog(CLASSNAME, mName)+ "Exception Occured >>"+ex.getMessage());
 		}
 	}
+	public static List<String> convertTOList(String propVal) {
+		String[] split = propVal.split(",");
+		ArrayList<String> lists = new ArrayList<>();
+		for (String s : split) {
+			lists.add(s);
+		}
+		return lists;
+	}
 	public static List<Properties> setProperties(String filePath) {
 		List<Properties> propList = new ArrayList<Properties>();
 		BufferedReader br = null;

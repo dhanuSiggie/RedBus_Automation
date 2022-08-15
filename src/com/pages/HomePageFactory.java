@@ -1,9 +1,11 @@
 //$Id$
 package com.pages;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,15 +14,23 @@ import org.openqa.selenium.support.PageFactory;
 public class HomePageFactory {
 
 	WebDriver driver;
+	JavascriptExecutor js;
+
 	
 	@FindBy(xpath="//input[@id='src']")
 	WebElement fromDestination;
+	
+	@FindBy(xpath="//div[@id='hmb']//ul[@class='config-list']")
+	WebElement manageBookingDropDown;
 
 	@FindBy(xpath="//input[@id='dest']")
 	WebElement toDestination;
 
 	@FindBy(id="search_btn")
 	WebElement searchButton;
+	
+	@FindBy(xpath="//div[@class='manageHeaderLbl']")
+	WebElement manageBookingButton ;
 	
 	@FindBy(xpath="//a[@title='rYde']")
 	WebElement ryde;
@@ -44,6 +54,7 @@ public class HomePageFactory {
 	public HomePageFactory(WebDriver driver) {
 		this.driver=driver;
 		PageFactory.initElements(driver,this);
+		js=(JavascriptExecutor) driver;
 	}
 	
 	public WebElement getRydeElement() {
@@ -74,6 +85,12 @@ public class HomePageFactory {
 		}
 
 	}
+//	public void clickManageBookingButton() {
+//		manageBookingButton.click();
+//	}
+	public void clickManageBookingButton() {
+		js.executeScript("arguments[0].click()",manageBookingButton);
+	}
 	public void selectDate(String journeyDate) {
 		datePicker.click();
 		WebElement getCalElement=getAllDates;	
@@ -101,6 +118,14 @@ public class HomePageFactory {
 			}
 		}
 
+	}
+	public List<String> getManagedBookingDropDownElementsList() {
+		List<WebElement> values=manageBookingDropDown.findElements(By.tagName("li"));
+		List<String> ddValues=new ArrayList<String>();
+		for(WebElement s:values) {
+			ddValues.add(s.getText());
+		}
+		return ddValues;
 	}
 
 	public void clickOnSearchButton() {

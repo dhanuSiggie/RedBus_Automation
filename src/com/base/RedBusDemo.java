@@ -2,6 +2,7 @@
 package com.base;
 
 import java.time.Duration;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,10 +23,10 @@ import com.util.TestNGAnnotations;
 public class RedBusDemo extends TestNGAnnotations {
 	private static final String CLASSNAME=RedBusDemo.class.getName();
 	private static Logger logger = LogManager.getLogger(CLASSNAME);
-	
+
 	WebDriver driver;
 	String baseUrl;
-	
+
 	@BeforeClass
 	public void setup() {
 		driver=new FirefoxDriver();
@@ -38,24 +39,33 @@ public class RedBusDemo extends TestNGAnnotations {
 		Assert.assertTrue(driver.getTitle().equals(expectVO.getTitle()));	
 		logger.info("Test Successful for Title");
 	}
-	
+
 	@Test(dataProviderClass =RedBusDataProvider.class,dataProvider = "data", priority =1)
 	public void verifyRydeLink(CasesVO casesVO,InputVO inputVO,ExpectVO expectVO) throws InterruptedException {
 		HomePageFactory homepage=new HomePageFactory(driver);
 		Assert.assertTrue(homepage.getRydeElementHREF().equals(casesVO.getProperties().getProperty("rydeLink")));	
 		logger.info("Test Successful for Ryde Link Verification");
 	}
-	@Test(dataProviderClass =RedBusDataProvider.class,dataProvider = "data", priority =1)
+	@Test(dataProviderClass =RedBusDataProvider.class,dataProvider = "data", priority =2)
 	public void verifyRedRailLink(CasesVO casesVO,InputVO inputVO,ExpectVO expectVO) throws InterruptedException {
 		HomePageFactory homepage=new HomePageFactory(driver);
 		Assert.assertTrue(homepage.getHREFAttribute(homepage.getRedRailElement()).equals(casesVO.getProperties().getProperty("redRailLink")));	
 		logger.info("Test Successful for Red Rail Link Verification");
 	}
-	@Test(dataProviderClass =RedBusDataProvider.class,dataProvider = "data", priority =1)
+	@Test(dataProviderClass =RedBusDataProvider.class,dataProvider = "data", priority =3)
 	public void verifyHelpLink(CasesVO casesVO,InputVO inputVO,ExpectVO expectVO) throws InterruptedException {
 		HomePageFactory homepage=new HomePageFactory(driver);
 		Assert.assertTrue(homepage.getHREFAttribute(homepage.getHelpElement()).equals(casesVO.getProperties().getProperty("helpLink")));	
 		logger.info("Test Successful for Help Link Verification");
+	}
+	@Test(dataProviderClass =RedBusDataProvider.class,dataProvider = "data", priority =4)
+	public void verifyManageBookingDropDown(CasesVO casesVO,InputVO inputVO,ExpectVO expectVO) throws InterruptedException {
+		HomePageFactory homepage=new HomePageFactory(driver);
+		homepage.clickManageBookingButton();
+		List <String> values=homepage.getManagedBookingDropDownElementsList();
+		Assert.assertTrue(values.equals(expectVO.getManageDdValues()));	
+		logger.info("Test Successful for Manage Booking DropDown Values");
+
 	}
 	@AfterTest
 	public void quit() {
