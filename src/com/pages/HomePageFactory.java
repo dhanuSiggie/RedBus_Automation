@@ -13,9 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class HomePageFactory {
 
-	WebDriver driver;
 	JavascriptExecutor js;
-
 	
 	@FindBy(xpath="//input[@id='src']")
 	private WebElement fromDestination;
@@ -52,9 +50,8 @@ public class HomePageFactory {
 	
 	
 	public HomePageFactory(WebDriver driver) {
-		this.driver=driver;
-		PageFactory.initElements(driver,this);
 		js=(JavascriptExecutor) driver;
+		PageFactory.initElements(driver,this);
 	}
 	
 	public WebElement getRydeElement() {
