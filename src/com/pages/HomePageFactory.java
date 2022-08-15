@@ -18,37 +18,37 @@ public class HomePageFactory {
 
 	
 	@FindBy(xpath="//input[@id='src']")
-	WebElement fromDestination;
+	private WebElement fromDestination;
 	
 	@FindBy(xpath="//div[@id='hmb']//ul[@class='config-list']")
-	WebElement manageBookingDropDown;
+	private WebElement manageBookingDropDown;
 
 	@FindBy(xpath="//input[@id='dest']")
-	WebElement toDestination;
+	private WebElement toDestination;
 
 	@FindBy(id="search_btn")
-	WebElement searchButton;
+	private WebElement searchButton;
 	
 	@FindBy(xpath="//div[@class='manageHeaderLbl']")
-	WebElement manageBookingButton ;
+	private WebElement manageBookingButton ;
 	
 	@FindBy(xpath="//a[@title='rYde']")
-	WebElement ryde;
+	private WebElement ryde;
 	
 	@FindBy(xpath="//a[@title='redRail']")
-	WebElement redRail;
+	private WebElement redRail;
 	
 	@FindBy(xpath="//a[text()='Help']")
-	WebElement helpLink;
+	private WebElement helpLink;
 
 	@FindBy(xpath="//ul[@class='autoFill homeSearch']")
-	WebElement allDestinations;
+	private WebElement allDestinations;
 	
 	@FindBy(id="onward_cal")
-	WebElement datePicker;
+	private WebElement datePicker;
 
 	@FindBy(xpath="//div[@id='rb-calendar_onward_cal']")
-	WebElement getAllDates;
+	private WebElement getAllDates;
 	
 	
 	public HomePageFactory(WebDriver driver) {

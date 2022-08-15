@@ -65,7 +65,6 @@ public class RedBusDemo extends TestNGAnnotations {
 		List <String> values=homepage.getManagedBookingDropDownElementsList();
 		Assert.assertTrue(values.equals(expectVO.getManageDdValues()));	
 		logger.info("Test Successful for Manage Booking DropDown Values");
-
 	}
 	@AfterTest
 	public void quit() {
