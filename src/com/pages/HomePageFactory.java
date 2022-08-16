@@ -8,15 +8,22 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class HomePageFactory {
+import com.util.CommonUtil;
+
+public class HomePageFactory  extends CommonUtil {
 
 	JavascriptExecutor js;
+	Actions action;
 	
 	@FindBy(xpath="//input[@id='src']")
 	private WebElement fromDestination;
+	
+	@FindBy(xpath="//a[text()='redbus']")
+	private WebElement redBusLogo;
 	
 	@FindBy(xpath="//div[@id='hmb']//ul[@class='config-list']")
 	private WebElement manageBookingDropDown;
@@ -51,6 +58,7 @@ public class HomePageFactory {
 	
 	public HomePageFactory(WebDriver driver) {
 		js=(JavascriptExecutor) driver;
+		action=new Actions(driver); //Setting action in Constructor
 		PageFactory.initElements(driver,this);
 	}
 	
@@ -127,6 +135,23 @@ public class HomePageFactory {
 
 	public void clickOnSearchButton() {
 		searchButton.click();
+	}
+	
+	//Scroll to Bottom of the Homepage.
+	public void scrollToBottom() {
+		js.executeScript("window.scrollTo(0,document.body.scrollHeight)","");
+	}
+	//Scroll to Bottom of the Homepage.
+	public void scrollToTop() {
+			js.executeScript("window.scrollTo(0,0)","");
+		}
+	//Right Click
+	public void rightClick() {
+		action.contextClick().perform();
+	}
+	//Move Mouse
+	public void moveMouseToHomePageRedBusLogo() {
+		action.moveToElement(redBusLogo).perform();
 	}
 
 }
