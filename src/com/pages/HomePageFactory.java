@@ -153,5 +153,8 @@ public class HomePageFactory  extends CommonUtil {
 	public void moveMouseToHomePageRedBusLogo() {
 		action.moveToElement(redBusLogo).perform();
 	}
+	public static HomePage getInstance(WebDriver driver) {
+		return new HomePage(driver);
+	}
 
 }
